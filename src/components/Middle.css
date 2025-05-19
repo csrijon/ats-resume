@@ -1,0 +1,92 @@
+.linkedin-section {
+  background: #002b5c;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+}
+
+.linkedin-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.linkedin-subtitle {
+  color: #b6c8e3;
+  font-size: 14px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.linkedin-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.linkedin-tabs span {
+  color: #b6c8e3;
+  cursor: pointer;
+}
+
+.linkedin-tabs .active-tab {
+  background: #0645a8;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+.linkedin-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #003675, #0849a7);
+  border-radius: 8px;
+  padding: 30px;
+  gap: 40px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.linkedin-image {
+  max-width: 100%;
+  width: 450px;
+  height: auto;
+}
+
+.linkedin-text {
+  max-width: 500px;
+  text-align: left;
+}
+
+.linkedin-text h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.linkedin-text p {
+  font-size: 14px;
+  color: #c4d3e6;
+}
+
+.linkedin-btn {
+  background: #14ce81;
+  color: #002b5c;
+  border: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.linkedin-btn:hover {
+  background: #12ba75;
+}
+
+/* Bottom Wave Effect */
