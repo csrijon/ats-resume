@@ -1,14 +1,14 @@
 .hero-section {
- height: 750px;
+   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem 5%;
-  background: linear-gradient(135deg, #180049, #430089);
+  padding: 5rem 6%;
+  background: linear-gradient(135deg, #1b0055, #4b00a8);
   color: white;
   position: relative;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
   overflow: hidden;
 }
 
@@ -18,19 +18,20 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .content h1 {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0;
 }
 
 .content p {
   font-size: 1.2rem;
-  line-height: 1.6;
-  color: #d1d5db;
+  line-height: 1.7;
+  color: #e2e8f0;
   margin: 0;
 }
 
@@ -42,14 +43,14 @@
 
 .primary,
 .secondary {
-  padding: 0.85rem 1.8rem;
-  font-size: 1rem;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-size: 1.05rem;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   justify-content: center;
 }
 
@@ -58,54 +59,58 @@
   color: white;
   border: none;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
 }
 
 .primary:hover {
   background-color: #16a34a;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.6);
 }
 
 .secondary {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 500;
+  backdrop-filter: blur(6px);
 }
 
 .secondary:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.8rem;
   margin-top: 2rem;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 1.8rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
   width: 260px;
   text-align: center;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 
 .card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.45rem;
+  margin-bottom: 0.6rem;
 }
 
 .card p {
   font-size: 1rem;
-  color: #e5e7eb;
+  color: #f1f5f9;
   margin: 0;
 }
 
@@ -117,10 +122,15 @@
 
 .image img {
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease;
+}
+
+.image img:hover {
+  transform: scale(1.02);
 }
 
 .hero-section::after {
@@ -128,7 +138,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 100px;
+  height: 110px;
   width: 100%;
   background: linear-gradient(to right, #0f172a, #1e293b);
   clip-path: ellipse(100% 100% at 50% 100%);
@@ -142,12 +152,12 @@
 @media (max-width: 1024px) {
   .hero-section {
     flex-direction: column;
-    padding: 3rem 5%;
+    padding: 4rem 5%;
   }
 
   .image {
     order: -1;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   .content {
@@ -166,7 +176,7 @@
 
 @media (max-width: 768px) {
   .content h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
   }
 
   .content p {
@@ -199,11 +209,11 @@
   }
 
   .content h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .card {
-    padding: 1.2rem;
+    padding: 1.4rem;
   }
 
   .primary,
