@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
-
+  const navigate = useNavigate()
   const handleToggle = () => {
     setIsLogin(!isLogin);
   };
 
+  const handelsubmit = (e) => {
+    e.preventDefault()
+    navigate("/Home")
+  }
+  
+
   return (
     <div className="auth-container">
-      <form className="auth-box">
+      <form className="auth-box" onSubmit={handelsubmit} >
         <h2>{isLogin ? 'Login' : 'Signup'}</h2>
 
         <input

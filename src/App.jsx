@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react'
+
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import Middle from './components/Middle'
@@ -9,11 +9,7 @@ import Score from './components/Score'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 function App() {
-  const [login, setlogin] = useState(false)
-
-const isloginclick = () => {
-  setlogin(true)
-}
+ 
 
   const router = createBrowserRouter([
     {

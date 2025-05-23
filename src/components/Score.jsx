@@ -1,7 +1,43 @@
-import React from 'react'
-import "./Score.css"
+import React, { useState } from 'react';
+import "./Score.css";
 
 const Score = () => {
+  const [file, setFile] = useState(null);
+
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!file) {
+      alert("File not found");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("resume", file);
+
+    try {
+      // Make sure backend URL is correct here
+      const response = await fetch("http://localhost:5000/uploads", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        alert("Upload failed");
+        return;
+      }
+
+      const result = await response.json();
+      alert("✅ File uploaded successfully!");
+      console.log(result);
+    } catch (error) {
+      console.error("❌ Upload failed:", error);
+    }
+  };
+
   return (
     <section className="pageContainer">
       <div className="leftSide">
@@ -19,7 +55,7 @@ const Score = () => {
       </div>
 
       <div className="rightSide">
-        <form className="uploadForm">
+        <form className="uploadForm" onSubmit={handleSubmit}>
           <label htmlFor="resume-upload" className="uploadLabel">
             Select your Resume (PDF)
             <input
@@ -27,6 +63,8 @@ const Score = () => {
               id="resume-upload"
               accept="application/pdf"
               className="fileInput"
+              name="resume"
+              onChange={handleChange}
             />
           </label>
           <button type="submit" className="submitBtn">
@@ -34,8 +72,8 @@ const Score = () => {
           </button>
         </form>
       </div>
-    </section>  
-  )
-}
+    </section>
+  );
+};
 
-export default Score
+export default Score;
