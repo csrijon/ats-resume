@@ -1,0 +1,94 @@
+.scoreCardContainer {
+  max-width: 450px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  padding: 25px;
+  margin-top: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.scoreHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.scoreHeader h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.scoreCircle {
+  font-weight: 900;
+  font-size: 2.7rem;
+  border: 5px solid #4caf50;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.scoreOutOf {
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  color: #777;
+}
+
+.breakdownSection h3,
+.suggestionsSection h3 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  color: #444;
+}
+
+.breakdownSection ul,
+.suggestionsSection ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.breakdownSection li {
+  margin-bottom: 18px;
+}
+
+.breakdownLabel {
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.breakdownValue {
+  font-weight: 700;
+  margin-right: 10px;
+  color: #222;
+}
+
+.progressBar {
+  height: 8px;
+  border-radius: 5px;
+  background-color: #4caf50;
+  transition: width 0.4s ease;
+  margin-top: 3px;
+  max-width: 100%;
+}
+
+.suggestionItem {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  padding-left: 10px;
+  border-left: 3px solid #4caf50;
+}

@@ -3,6 +3,8 @@ import "./Score.css";
 
 const Score = () => {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [scoreData, setScoreData] = useState(null); // holds GenAI result
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
@@ -10,31 +12,44 @@ const Score = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) {
-      alert("File not found");
-      return;
-    }
+    if (!file) return alert("Please upload a PDF file");
 
     const formData = new FormData();
     formData.append("resume", file);
 
     try {
-      // Make sure backend URL is correct here
-      const response = await fetch("http://localhost:5000/uploads", {
+      setLoading(true);
+
+      // Step 1: Upload PDF to server
+      const uploadRes = await fetch("http://localhost:5000/uploads", {
         method: "POST",
         body: formData,
       });
 
-      if (!response.ok) {
-        alert("Upload failed");
-        return;
-      }
+      const uploadData = await uploadRes.json();
+      if (!uploadRes.ok) throw new Error(uploadData.error || "Upload failed");
 
-      const result = await response.json();
-      alert("✅ File uploaded successfully!");
-      console.log(result);
+      // Step 2: Get file ID from MongoDB (if returned) — but your current upload route doesn't return file ID!
+      // Let's assume we know the file is stored in Resume collection with `.text`, and we get ID back
+      const resumeId = uploadData.resumeId; // <-- Must return this from backend
+
+      // Step 3: Call GenAI analysis
+      const analyzeRes = await fetch("http://localhost:5000/analyze-resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resumeId }),
+      });
+
+      const analyzeData = await analyzeRes.json();
+      if (!analyzeRes.ok) throw new Error(analyzeData.error || "Analysis failed");
+
+      setScoreData(analyzeData); // Save the GenAI response
+
     } catch (error) {
-      console.error("❌ Upload failed:", error);
+      console.error(error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,14 +58,13 @@ const Score = () => {
       <div className="leftSide">
         <h1>Score My Resume</h1>
         <p>
-          Upload your resume to get an instant, detailed score based on industry
-          best practices. Improve your chances by knowing exactly where to improve.
+          Upload your resume to get an instant, detailed score based on industry best practices.
         </p>
         <ul>
           <li>Quick feedback on formatting and keywords</li>
-          <li>Identify strengths and gaps in your resume</li>
-          <li>Tailor your resume for specific job applications</li>
-          <li>Boost your chances to get interviews</li>
+          <li>Identify strengths and gaps</li>
+          <li>Tailor for job applications</li>
+          <li>Boost your chances for interviews</li>
         </ul>
       </div>
 
@@ -67,10 +81,29 @@ const Score = () => {
               onChange={handleChange}
             />
           </label>
-          <button type="submit" className="submitBtn">
-            Score Resume
+          <button type="submit" className="submitBtn" disabled={loading}>
+            {loading ? "Scoring..." : "Score Resume"}
           </button>
         </form>
+
+        {scoreData && (
+          <div className="scoreResult">
+            <h2>🎯 Resume Score: {scoreData.score}/100</h2>
+            <ul>
+              <li>📌 Keyword Matching: {scoreData.breakdown.keyword_matching}</li>
+              <li>📌 Section Presence: {scoreData.breakdown.section_presence}</li>
+              <li>📌 Action Verbs: {scoreData.breakdown.action_verbs_metrics}</li>
+              <li>📌 Formatting: {scoreData.breakdown.formatting}</li>
+              <li>📌 Readability: {scoreData.breakdown.readability}</li>
+            </ul>
+            <h3>Suggestions</h3>
+            <ul>
+              {scoreData.suggestions.map((s, i) => (
+                <li key={i}>👉 {s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );

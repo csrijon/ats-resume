@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import AuthForm from './components/AuthForm'
 import Score from './components/Score'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import ScoreCard from './components/ScoreCard';
 
 function App() {
  
@@ -23,6 +24,10 @@ function App() {
     {
       path: "/Score",
       element: <><Navbar/><Score/><Middle/><Footer/></>
+    },
+    {
+      path: "/ScoreCard",
+      element: <><Navbar/><ScoreCard/><Middle/><Footer/></>
     }
   ]);
   
