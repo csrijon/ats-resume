@@ -1,5 +1,5 @@
 import './App.css'
-
+import EnhancedResume from './components/EnhancedResume';
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import Middle from './components/Middle'
