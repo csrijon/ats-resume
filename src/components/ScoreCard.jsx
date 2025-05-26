@@ -1,25 +1,17 @@
-// ScoreCard.jsx
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import "./ScoreCard.css";
+import "../components/ScoreCard.css"; // optional styling
 
 const ScoreCard = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { scoreData } = location.state || {};
+  const location = useLocation();
+  const { scoreData, resumeId } = location.state || {};
 
-  if (!scoreData) {
-    return (
-      <div className="scoreCardContainer">
-        <h2>No Score Data Found</h2>
-        <button onClick={() => navigate("/")}>Go Back</button>
-      </div>
-    );
-  }
+  if (!scoreData || !resumeId) return <p>Invalid data. Please upload again.</p>;
 
   return (
-    <div className="scoreCardContainer">
-      <h1>🎯 Resume Score: {scoreData.score}/100</h1>
+    <div className="scoreCard">
+      <h2>🎯 Resume Score: {scoreData.score}/100</h2>
       <ul>
         <li>📌 Keyword Matching: {scoreData.breakdown.keyword_matching}</li>
         <li>📌 Section Presence: {scoreData.breakdown.section_presence}</li>
@@ -35,7 +27,12 @@ const ScoreCard = () => {
         ))}
       </ul>
 
-      <button onClick={() => navigate("/")}>🏠 Score Another Resume</button>
+      <button
+        className="improveBtn"
+        onClick={() => navigate('/improve-resume', { state: { resumeId } })}
+      >
+        ✨ Improve Resume
+      </button>
     </div>
   );
 };

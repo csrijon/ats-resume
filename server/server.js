@@ -5,6 +5,7 @@ import cors from "cors";
 import File from "../server/models/db.js"; // file schema/model
 import Resume from "../server/models/Resume.js"; // new Resume model for storing text
 import analyze from "../server/routes/analyze.js";
+import improve from "../server/routes/improve.js"
 import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 // import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.js";
 import dotenv from "dotenv";
@@ -19,6 +20,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 app.use("/analyze-resume", analyze);
+app.use("/improve-resume", improve)
 
 mongoose.connect("mongodb://127.0.0.1:27017/uploads");
 mongoose.connection.once("open", () => {

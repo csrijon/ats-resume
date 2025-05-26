@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Score.css";
 
 const Score = () => {
+    const navigate = useNavigate();
+
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [scoreData, setScoreData] = useState(null); // holds GenAI result
+  // const [scoreData, setScoreData] = useState(null); // holds GenAI result
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
@@ -42,8 +45,8 @@ const Score = () => {
 
       const analyzeData = await analyzeRes.json();
       if (!analyzeRes.ok) throw new Error(analyzeData.error || "Analysis failed");
-
-      setScoreData(analyzeData); // Save the GenAI response
+      navigate('/ScoreCard', { state: { scoreData: analyzeData, resumeId } });
+      // setScoreData(analyzeData); // Save the GenAI response
 
     } catch (error) {
       console.error(error);
@@ -86,24 +89,6 @@ const Score = () => {
           </button>
         </form>
 
-        {scoreData && (
-          <div className="scoreResult">
-            <h2>🎯 Resume Score: {scoreData.score}/100</h2>
-            <ul>
-              <li>📌 Keyword Matching: {scoreData.breakdown.keyword_matching}</li>
-              <li>📌 Section Presence: {scoreData.breakdown.section_presence}</li>
-              <li>📌 Action Verbs: {scoreData.breakdown.action_verbs_metrics}</li>
-              <li>📌 Formatting: {scoreData.breakdown.formatting}</li>
-              <li>📌 Readability: {scoreData.breakdown.readability}</li>
-            </ul>
-            <h3>Suggestions</h3>
-            <ul>
-              {scoreData.suggestions.map((s, i) => (
-                <li key={i}>👉 {s}</li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </section>
   );

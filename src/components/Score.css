@@ -1,73 +1,101 @@
-/* Container: side by side on desktop, column on mobile */
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --accent: #4fd1c5;
+  --text-light: #f7fafc;
+  --text-dark: #2d3748;
+}
+
+/* Container: Enhanced with dynamic background */
 .pageContainer {
   display: flex;
   height: 100vh;
   width: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #222;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   overflow: hidden;
+  position: relative;
 }
 
-/* Left side text */
+/* Animated background elements */
+.pageContainer::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(79,209,197,0.05) 0%, transparent 50%);
+  animation: float 40s linear infinite;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Left side: Enhanced with dynamic text */
 .leftSide {
   flex: 1;
   padding: 4rem 3rem;
-  color: white;
+  color: var(--text-light);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leftSide:hover {
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .leftSide h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   margin-bottom: 1.5rem;
   font-weight: 900;
   letter-spacing: 1.5px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   line-height: 1.1;
+  position: relative;
+  animation: textReveal 1s ease-out;
+}
+
+@keyframes textReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .leftSide p {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1.7;
   margin-bottom: 2.5rem;
-  opacity: 0.95;
   max-width: 500px;
-}
-
-.leftSide ul {
-  list-style: inside disc;
-  font-size: 1.15rem;
-  line-height: 1.6;
   opacity: 0.9;
-  max-width: 450px;
+  animation: fadeIn 1s 0.2s both;
 }
 
-.leftSide ul li {
-  margin-bottom: 1rem;
-}
-
-/* Right side form */
+/* Right side: Enhanced form interactions */
 .rightSide {
   flex: 1;
-  background: #fff;
+  background: var(--text-light);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3rem 3.5rem;
-  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.18);
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  transition: background 0.3s ease;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rightSide:hover {
-  background: #f0f3ff;
+  transform: translateY(-2px);
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.25);
 }
 
 .uploadForm {
@@ -76,108 +104,147 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  animation: formEnter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Upload label */
+@keyframes formEnter {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Enhanced upload label */
 .uploadLabel {
   cursor: pointer;
   padding: 1.6rem 2rem;
-  border: 3px dashed #667eea;
+  border: 3px dashed var(--primary);
   border-radius: 16px;
-  text-align: center;
   font-weight: 700;
   font-size: 1.3rem;
-  color: #4a4ec8;
-  background: linear-gradient(135deg, #dde1ff, #f4f6ff);
-  box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
-  user-select: none;
+  color: var(--primary);
+  background: rgba(102, 126, 234, 0.05);
   position: relative;
-  transition: all 0.35s ease;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.uploadLabel:hover,
-.uploadLabel:focus {
-  background-color: #e0e4ff;
-  border-color: #4450c0;
-  color: #3340a6;
-  box-shadow: 0 12px 20px rgba(68, 80, 192, 0.4);
-  transform: translateY(-3px);
+.uploadLabel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(102, 126, 234, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Hide default file input */
-.fileInput {
-  display: none;
+.uploadLabel:hover {
+  background: rgba(102, 126, 234, 0.08);
+  transform: scale(1.02);
 }
 
-/* Submit button */
+.uploadLabel:active {
+  transform: scale(0.98);
+}
+
+/* Drag and drop feedback */
+.uploadLabel.dragover {
+  background: rgba(79, 209, 197, 0.15);
+  border-color: var(--accent);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Enhanced submit button */
 .submitBtn {
-  background: #5063f0;
-  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text-light);
   font-weight: 700;
   font-size: 1.3rem;
   padding: 1rem 0;
   border: none;
   border-radius: 40px;
   cursor: pointer;
-  box-shadow: 0 12px 25px rgba(80, 99, 240, 0.7);
-  transition: background-color 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
-  user-select: none;
-  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.submitBtn:hover,
-.submitBtn:focus {
-  background-color: #3b4ed9;
-  box-shadow: 0 16px 35px rgba(59, 78, 217, 0.85);
+.submitBtn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    transparent 25%, 
+    rgba(255,255,255,0.15) 50%, 
+    transparent 75%
+  );
+  animation: buttonFlow 3s infinite linear;
+}
+
+@keyframes buttonFlow {
+  0% { transform: rotate(0deg) translateX(-50%); }
+  100% { transform: rotate(360deg) translateX(-50%); }
+}
+
+.submitBtn:hover {
   transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(80, 99, 240, 0.5);
 }
 
-/* Responsive: stacked layout on small screens */
+/* Responsive enhancements */
 @media (max-width: 768px) {
   .pageContainer {
     flex-direction: column;
     height: auto;
-    padding: 2rem 0;
+    min-height: 100vh;
   }
+
   .leftSide,
   .rightSide {
-    flex: none;
-    width: 100%;
-    height: auto;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     border-radius: 0;
     box-shadow: none;
-    background: none;
-    color: #fff;
   }
-  .leftSide {
-    order: 2;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-  }
+
   .rightSide {
-    order: 1;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(80, 99, 240, 0.2);
+    margin: 1rem;
     border-radius: 20px;
-    margin: 1rem 1.5rem 3rem;
-    color: #222;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
   }
-  .uploadForm {
-    max-width: 100%;
-  }
+
   .leftSide h1 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
-  .leftSide p,
-  .leftSide ul {
-    font-size: 1.1rem;
-  }
+
   .uploadLabel {
-    font-size: 1.1rem;
-    padding: 1.3rem 1.6rem;
-  }
-  .submitBtn {
     font-size: 1.15rem;
-    padding: 0.85rem 0;
+    padding: 1.4rem;
   }
+}
+
+/* Loading state animation */
+@keyframes loading {
+  to { transform: rotate(360deg); }
+}
+
+.loading::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: loading 0.75s linear infinite;
+  margin-left: 0.5em;
 }

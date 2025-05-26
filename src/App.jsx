@@ -8,6 +8,7 @@ import AuthForm from './components/AuthForm'
 import Score from './components/Score'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import ScoreCard from './components/ScoreCard';
+import ImproveResume from './components/ImproveResume';
 
 function App() {
  
@@ -28,6 +29,10 @@ function App() {
     {
       path: "/ScoreCard",
       element: <><Navbar/><ScoreCard/><Middle/><Footer/></>
+    },
+    {
+      path: "/improve-resume",
+      element:<><Navbar/><ImproveResume/><Middle/><Footer/></>
     }
   ]);
   
