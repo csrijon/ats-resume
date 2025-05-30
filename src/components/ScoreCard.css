@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 3rem;
-  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(246,248,255,0.95));
+  background: #764ba2;
   backdrop-filter: blur(16px);
   border-radius: 24px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.1), 
@@ -160,7 +160,8 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .scoreCard {
-    background: linear-gradient(145deg, rgba(25,25,25,0.95), rgba(40,40,40,0.95));
+    /* background: linear-gradient(145deg, rgba(25,25,25,0.95), rgba(40,40,40,0.95)); */
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: #ffffff;
     box-shadow: 0 12px 40px rgba(0,0,0,0.3), 
                 0 0 0 1px rgba(255,255,255,0.1) inset;

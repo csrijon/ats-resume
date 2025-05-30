@@ -7,9 +7,7 @@ import Resume from "../server/models/Resume.js"; // new Resume model for storing
 import analyze from "../server/routes/analyze.js";
 import improve from "../server/routes/improve.js"
 import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
-// import pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.js";
-import dotenv from "dotenv";
-dotenv.config();
+
 
 const { getDocument, GlobalWorkerOptions } = pdfjsLib;
 // GlobalWorkerOptions.workerSrc = pdfjsWorker;

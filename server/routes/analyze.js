@@ -6,7 +6,7 @@ const router = express.Router();
 
 const API_KEY = "AIzaSyDr_hswX8K-WvYnIGcyMdya1gnOTA9mZDE";
 
-// Simple manual resume scoring function (fallback)
+
 function manualAnalyzeResume(text) {
   const keywords = ["JavaScript", "Node.js", "React", "API", "SQL", "Git"];
   const sections = ["Education", "Experience", "Skills", "Projects"];
